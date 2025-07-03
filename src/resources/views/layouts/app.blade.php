@@ -19,23 +19,8 @@
             </div>
             @yield('error')
         </header>
-    
-        <form class="form">
-            <span class="form__input">
-                <input class="form__input-box" type="text" name="todo_content" />
-            </span>
-            <span class="form__button">
-                <button class="form__button-submit" type="submit">作成</button>
-            </span>
-        </form>
-
-        <div class="list">
-            <div class="list__title">
-                <h2>Todo</h2>
-            </div>
 
            @yield('content')
-        </div>
     </main>
 </body>
 </html>
