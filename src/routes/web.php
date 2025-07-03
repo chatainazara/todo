@@ -18,6 +18,7 @@ use App\Http\Controllers\TodoController;
 // });
 
 Route::get('/',[TodoController::class,'index']);
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::post('/todos',[TodoController::class,'store']);
