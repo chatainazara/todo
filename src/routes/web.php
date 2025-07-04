@@ -22,3 +22,4 @@ Route::get('/',[TodoController::class,'index']);
 //     return view('welcome');
 // });
 Route::post('/todos',[TodoController::class,'store']);
+Route::patch('/todos/updateORremove',[TodoController::class,'updateORremove']);
