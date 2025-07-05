@@ -1,10 +1,10 @@
-.header__attention {
-    background: #aaecb7;
+.header__attention2 {
+    background: #f1b1a1;
     padding: 15px 15px;
     margin-bottom: 30px;
 }
 
-.header__comments {
+.header__comments2 {
     display: inline-block;
 }
 
@@ -18,10 +18,6 @@
     border-bottom: 1px solid black;
     width: 400px;
 }
-
-/* .list__content-text,.list__category-text {
-
-} */
 
 .list__content-text--box,
 .list__category-text--box {

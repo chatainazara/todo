@@ -11,6 +11,11 @@ class Todo extends Model
 
         protected $fillable =[
             'content',
+            'category_id',
         ];
+
+        public function category2(){
+            return $this->belongsTo('App\Models\Category','category_id','id');
+          }
 
 }

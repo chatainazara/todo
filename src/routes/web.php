@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,11 @@ use App\Http\Controllers\TodoController;
 // });
 
 Route::get('/',[TodoController::class,'index']);
+
+Route::get('/category',[CategoryController::class,'cate_index']);
+Route::post('/category',[CategoryController::class,'cate_store']);
+
+Route::patch('/category/updateORremove',[CategoryController::class,'cate_updateORremove']);
 // Route::get('/', function () {
 //     return view('welcome');
 // });
