@@ -16,6 +16,9 @@
                 <a class="header__logo" href="/">
                 Todo
                 </a>
+                <a class="category__button" href="/category">
+                カテゴリー一覧
+                </a>
             </div>
             @yield('error')
         </header>

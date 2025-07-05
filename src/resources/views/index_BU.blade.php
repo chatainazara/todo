@@ -25,39 +25,18 @@
 
         <form class="form" action="/todos" method="POST">
         @csrf
-            <h2 class="form__title">新規作成</h2>
-            <span class="form__input-content">
+            <span class="form__input">
                 <input class="form__input-box" type="text" name="xx" value={{$yy}} />
-            </span>
-            <span class="form__input-cate">
-                <input class="form__input-box" type="text" name="zz" value={{$ww}} />
             </span>
             <span class="form__button">
                 <button class="form__button-submit" type="submit">作成</button>
             </span>
         </form>
 
-        <form class="find" action="/todos/find" method="POST">
-        @csrf
-            <h2 class="find__title"></h2>
-            <span class="find__input-content">
-                <input class="find__input-box" type="text" name="xx" value={{$yy}} />
-            </span>
-            <span class="find__input-cate">
-                <input class="find__input-box" type="text" name="zz" value={{$ww}} />
-            </span>
-            <span class="find__button">
-                <button class="find__button-submit" type="submit">検索</button>
-            </span>
-        </form>
-
         <div class="list">
-            <span class="content__title">
-            Todo
-            </span><!-- つなぎ 
-            --><span class="category__title">
-            Category
-            </span>
+            <div class="list__title">
+                <h2>Todo</h2>
+            </div>
             <ul class="list__content">
                 <!-- <form action="/" method="patch"> -->
                 @foreach($test as $todo)
@@ -66,14 +45,9 @@
                 @csrf
                 <li class="list__content-line">
                     <span class="list__content-text">
-                        <input class="list__content-text--box" type="text" name="inputcontent" value="{{$todo['content']}}" />
+                        <input class="list__content-text--box" type="text" name="inputtext" value="{{$todo['content']}}" />
                         <!-- value="{{$todo->content}}"でもOK -->
                         <input type="hidden" name="id2" value="{{ $todo['id'] }}">
-                    </span>
-                    <span class="list__category-text">
-                        <input class="list__category-text--box" type="text" name="inputcategory" value="{{$todo['name']}}" />
-                        <!-- value="{{$todo->content}}"でもOK -->
-                        <!-- <input type="hidden" name="id2" value="{{ $todo['id'] }}"> -->
                     </span>
                     <span class="list__content-button">
                         <button class="list__content-button--update" type="submit" name="update">更新</button>
