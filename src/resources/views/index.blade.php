@@ -4,80 +4,80 @@
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 @endsection
 
-            @section('error')
-            @if(session('message'))
-            <div class="header__attention">
-                <a class="header__comments">
-                {{ session('message') }}
-                </a>
-            </div>
-            @endif
-            @endsection
-
         @section('content')
-            @if (count($errors) > 0)
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{$error}}A</li>
-                @endforeach
-            </ul>
-            @endif
-
+        <!-- todoの追加 -->
         <form class="form" action="/todos" method="POST">
         @csrf
             <h2 class="form__title">新規作成</h2>
+            <!-- todo部分 -->
             <span class="form__input-content">
-                <input class="form__input-box" type="text" name="xx" value={{$yy}} />
+                <input class="form__input-box" type="text" name="xx" value="{{$default}}" />
             </span>
-            <span class="form__input-cate">
-                <input class="form__input-box" type="text" name="zz" value={{$ww}} />
-            </span>
+            <!-- カテゴリー部分 -->
+            <select class="form__input-category" name="cate11">
+                <option value="aaa" ></option>
+                @foreach($categories as $category)
+                <option value="{{$category['id']}}" >{{$category['name']}}</option>
+                @endforeach
+            </select>
             <span class="form__button">
                 <button class="form__button-submit" type="submit">作成</button>
             </span>
         </form>
 
-        <form class="find" action="/todos/find" method="POST">
+        <!-- 検索 -->
+        <form class="form" action="/todos/search" method="get">
         @csrf
-            <h2 class="find__title"></h2>
-            <span class="find__input-content">
-                <input class="find__input-box" type="text" name="xx" value={{$yy}} />
+            <!-- todo部分 -->
+            <h2 class="form__title">Todo検索</h2>
+            <span class="form__input-content">
+                <input class="form__input-box" type="text" name="keyword" value="{{ old('keyword') }}" />
             </span>
-            <span class="find__input-cate">
-                <input class="find__input-box" type="text" name="zz" value={{$ww}} />
-            </span>
-            <span class="find__button">
-                <button class="find__button-submit" type="submit">検索</button>
+            <!-- Category部分 -->
+            <select class="form__input-category" name="category_id6">
+                <option value="aaa" ></option>
+                @foreach($categories as $category)
+                <option value="{{$category['id']}}" >{{$category['name']}}</option>
+                @endforeach
+            </select>
+            <!-- ボタン部分 -->
+            <span class="form__button">
+                <button class="form__button-submit" type="submit">検索</button>
             </span>
         </form>
 
+        <!-- リスト -->
+        <!-- リストのタイトル -->
         <div class="list">
-            <span class="content__title">
+            <span class="list__title--content">
             Todo
-            </span><!-- つなぎ 
-            --><span class="category__title">
+            </span><!-- つなぎ
+            --><span class="list__title--category">
             Category
             </span>
-            <ul class="list__content">
-                <!-- <form action="/" method="patch"> -->
-                @foreach($test as $todo)
-                <form class="list__form" action="/todos/updateORremove" method="POST">
+            <!-- リストの中身 -->
+            <ul class="list__column">
+                @foreach($todos as $todo)
+                <form class="list__column-form" action="/todos/updateORremove" method="POST">
                 @method('PATCH')
                 @csrf
-                <li class="list__content-line">
-                    <span class="list__content-text">
-                        <input class="list__content-text--box" type="text" name="inputcontent" value="{{$todo['content']}}" />
-                        <!-- value="{{$todo->content}}"でもOK -->
+                <li class="list__column-line">
+                    <!-- Todo部分 -->
+                    <span class="list__column-content">
+                        <input class="list__column-content--textbox" type="text" name="inputcontent" value="{{$todo['content']}}" />
                         <input type="hidden" name="id2" value="{{ $todo['id'] }}">
                     </span>
-                    <span class="list__category-text">
-                        <input class="list__category-text--box" type="text" name="inputcategory" value="{{$todo['name']}}" />
-                        <!-- value="{{$todo->content}}"でもOK -->
-                        <!-- <input type="hidden" name="id2" value="{{ $todo['id'] }}"> -->
-                    </span>
-                    <span class="list__content-button">
-                        <button class="list__content-button--update" type="submit" name="update">更新</button>
-                        <button class="list__content-button--remove" type="submit" name="remove">削除</button>
+                    <!-- Category部分 -->
+                    <select class="list__column-category" name="category_id7">
+                    <option value="{{$todo->category2->id}}" >初期：{{$todo->category2->name}}</option>
+                    @foreach($categories as $category)
+                    <option value="{{$category['id']}}" >{{$category['name']}}</option>
+                    @endforeach
+                    </select>
+                    <!-- ボタン部分 -->
+                    <span class="list__column-button">
+                        <button class="list__column-button--update" type="submit" name="update">更新</button>
+                        <button class="list__column-button--remove" type="submit" name="remove">削除</button>
                     </span>
                 </li>
                 </form>
