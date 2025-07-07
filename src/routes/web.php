@@ -29,3 +29,5 @@ Route::patch('/category/updateORremove',[CategoryController::class,'cate_updateO
 // });
 Route::post('/todos',[TodoController::class,'store']);
 Route::patch('/todos/updateORremove',[TodoController::class,'updateORremove']);
+
+Route::get('/todos/search',[TodoController::class,'search']);

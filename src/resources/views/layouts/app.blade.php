@@ -20,10 +20,25 @@
                 カテゴリー一覧
                 </a>
             </div>
-            @yield('error')
+        <!-- アテンション with messageの表示　-->
+        @if(session('message'))
+        <div class="header__attention green">
+                <a class="header__comments">
+                {{ session('message') }}
+                </a>
+        </div>
+        @endif
+        <!-- バリデーション -->
+        @if (count($errors) > 0)
+            <ul class="header__attention red">
+            @foreach ($errors->all() as $error)
+            <li>{{$error}}</li>
+            @endforeach
+            </ul>
+        @endif
         </header>
 
-           @yield('content')
+        @yield('content')
     </main>
 </body>
 </html>

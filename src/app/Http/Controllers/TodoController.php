@@ -10,46 +10,53 @@ use App\Http\Requests\TodoRequest;
 class TodoController extends Controller
 {
     public function index(){
-        $todos = Todo::all();
+        $todos = Todo::with('category2')->get();
         // dd($todos);
-        // return view('index',['yy'=>'あざネギ']);
-        // return view('index',compact('todos'));
-        return view('index',['test'=>$todos,
-                            'yy'=>'**TeSt**',
-                            'ww'=>'カテゴリ']);
+        $categories= Category::select('id','name')->get();
+        // dd($cate1);
+        return view('index',['todos'=>$todos,
+                            'default'=>'',
+                            'categories'=>$categories,
+                            ]);
     }
 
     public function store(TodoRequest $request){
-        // dd($request);
-        $todo=$request['xx'];
-        $cate=$request['zz'];
-        // $todo=$request->only(['xx']);
-        // dd($todo);
-        // $todo2=$todo['xx'];
-        // $category3=Category::find
+        $todoAll=$request->all();
+        $catetext=Category::find($todoAll['cate11']);
         Todo::create([
-            'content'=> $todo,
-            // 'name'=> $cate,
-            // 'category_id'=>'1'
-        ]);
+            'content'=> $todoAll['xx'],
+            'category_id'=>$catetext['id']
+            ]);
         return redirect('/')->with('message','Todoを作成しました');
     }
 
     public function updateORremove(Request $request){
         // dd($request);
         if($request->has('update')){
-            $form2=$request->all();
+            $form2=$request->only('inputcontent','category_id7');
+            // dd($form2);
+            // $cate12=Category::where('name',$form2['category_name'])->first();
+            // dd($cate12);
             unset($form2['_token']);
             Todo::find($request->id2)->update([
-            'content'=>$form2['inputcontent']
+            'content'=>$form2['inputcontent'],
+            'category_id'=>$form2['category_id7']
             ]);
-        return redirect('/');
+        return redirect('/')->with('message','Todoを更新しました');
         }
 
         elseif($request->has('remove')){
             Todo::find($request->id2)->delete();
             return redirect('/')->with('message','Todoを削除しました');
         }
+    }
+
+    public function search(Request $request)
+    {
+        $todos = Todo::with('category2')->CategorySearch($request->category_id6)->KeywordSearch($request->keyword)->get();
+        $categories = Category::all();
+        $default='';
+        return view('index',compact('todos','categories','default'));
     }
 
 

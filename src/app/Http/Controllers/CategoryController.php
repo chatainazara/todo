@@ -16,11 +16,11 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function cate_store(Request $request){
-        $cate=$request['bb'];
+    public function cate_store(CategoryRequest $request){
+        $cate=$request->All();
         // dd($cate);
         Category::create([
-            'name'=>$cate,
+            'name'=>$cate['bb'],
         ]);
         return redirect('/category')->with('message','カテゴリを作成しました');
     }
