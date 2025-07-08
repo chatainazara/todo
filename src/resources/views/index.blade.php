@@ -15,7 +15,7 @@
             </span>
             <!-- カテゴリー部分 -->
             <select class="form__input-category" name="cate11">
-                <option value="" ></option>
+                <option value="aaa" ></option>
                 @foreach($categories as $category)
                 <option value="{{$category['id']}}" >{{$category['name']}}</option>
                 @endforeach
